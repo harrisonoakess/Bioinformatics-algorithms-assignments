@@ -1,25 +1,28 @@
+import random
+
 """
 GreedyMotifSearch(Dna, k, t)
-    form a set of k-mers BestMotifs by selecting 1st k-mers in each string from Dna
+    BestMotifs ← motif matrix formed by first k-mers in each string from Dna
     for each k-mer Motif in the first string from Dna
         Motif1 ← Motif
         for i = 2 to t
-            apply Laplace's Rule of Succession to form Profile from motifs Motif1, …, Motifi-1
+            form Profile from motifs Motif1, …, Motifi - 1
             Motifi ← Profile-most probable k-mer in the i-th string in Dna
         Motifs ← (Motif1, …, Motift)
         if Score(Motifs) < Score(BestMotifs)
             BestMotifs ← Motifs
-    output BestMotifs
+    return BestMotifs
 """
 def form_profile(motif: list[str]):
     profile = []
     for i in range(len(motif[0])):
-        positionDictionary = {'A':0,'C':0,'G':0,'T':0}
+        positionDictionary = {'A':1,'C':1,'G':1,'T':1}
         for nuc in motif:
             positionDictionary[nuc[i]] +=1
         for nuc in positionDictionary:
-            positionDictionary [nuc] /= len(motif)
+            positionDictionary [nuc] /= len(motif) + 2
         profile.append(positionDictionary)
+    # print(profile)
     return profile
 
 def profile_most_probable_kmer(text: str, k: int, profile: list[dict[str, float]]) -> str:
@@ -44,7 +47,7 @@ def get_score(motifs: list[str]):
         score += len(motifs)-maxCount
     return score
 
-def greedy_motif_search(dna: list[str], k: int, t: int) -> list[str]:
+def greedy_motif_search_pseudocounts(dna: list[str], k: int, t: int) -> list[str]:
     best_motifs = []
     for seq in dna:
         best_motifs.append(seq[:k])
@@ -63,4 +66,4 @@ input = ['GGCGTTCAGGCA', 'AAGAATCAGTCA', 'CAAGGAGTTCGC', 'CACGTCAATCAC', 'CAATAA
 k = 3
 t = 5
 
-print(greedy_motif_search(input, k, t))
+print(greedy_motif_search_pseudocounts(input, k, t))
