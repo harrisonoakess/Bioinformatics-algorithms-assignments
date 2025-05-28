@@ -18,4 +18,5 @@ def burrows_wheeler_transform(text: str) -> str:
 
 
 text = "GCGTGCCTGGTCA$"
+# text = "ACCG$"
 print(burrows_wheeler_transform(text))
