@@ -41,4 +41,3 @@ for i in range(len(text)-1):
         answer *= BtoB
 
 print(answer)
-

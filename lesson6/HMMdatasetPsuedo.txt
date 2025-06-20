@@ -1,0 +1,14 @@
+0.273 0.01
+--------
+A B C D E
+--------
+C-A
+--A
+CAD
+---
+CA-
+CAA
+CAA
+CAA
+C-A
+CAA
